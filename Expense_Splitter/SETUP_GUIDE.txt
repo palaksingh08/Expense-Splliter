@@ -1,0 +1,92 @@
+================================================================================
+EXPENSE SPLITTER - SETUP GUIDE (Hindi/English)
+================================================================================
+
+STEP 1: DATABASE SETUP (Database Setup)
+----------------------------------------
+1. MySQL ko start karein
+2. MySQL Command Line ya MySQL Workbench open karein
+3. database_setup.sql file ko run karein:
+   
+   MySQL Command Line me:
+   mysql -u root -p
+   source C:/Tomcat 9.0/webapps/Expense_Splitter/database_setup.sql
+   
+   Ya phir file ka content copy karke MySQL me paste karein
+
+STEP 2: MYSQL JDBC DRIVER ADD KAREIN
+-------------------------------------
+1. MySQL JDBC Driver download karein:
+   mysql-connector-java-8.0.33.jar (ya latest version)
+   
+2. Driver ko is location par copy karein:
+   C:\Tomcat 9.0\webapps\Expense_Splitter\WEB-INF\lib\mysql-connector-java-8.0.33.jar
+
+STEP 3: DATABASE CONFIGURATION (Database Settings)
+---------------------------------------------------
+Agar aapka MySQL password "root" nahi hai, to ye files edit karein:
+
+1. WEB-INF\src\dao\UserDao.java
+   - Line 12: jdbcPassword = "apna_password";
+
+2. WEB-INF\src\dao\ExpenseDAO.java
+   - Line 16: jdbcPassword = "apna_password";
+
+STEP 4: JAVA FILES COMPILE KAREIN
+----------------------------------
+Option 1: compile.bat file use karein
+   - compile.bat file par double-click karein
+   - Ya command prompt me: compile.bat
+
+Option 2: Manual compilation
+   cd C:\Tomcat 9.0\webapps\Expense_Splitter\WEB-INF\src
+   javac -cp ".;../lib/servlet-api.jar;../lib/mysql-connector-java-8.0.33.jar" -d ../classes controller/*.java dao/*.java model/*.java util/*.java
+
+STEP 5: TOMCAT START KAREIN
+----------------------------
+1. Tomcat server start karein
+2. Browser me jayein: http://localhost:8080/Expense_Splitter/
+3. Ya directly: http://localhost:8080/Expense_Splitter/login.jsp
+
+STEP 6: APPLICATION USE KAREIN
+-------------------------------
+1. Pehle Sign Up karein (naya account banayein)
+2. Phir Login karein
+3. Expenses add karein
+4. Summary dekhein
+
+TROUBLESHOOTING (Problems aur Solutions)
+-----------------------------------------
+
+Problem: Database connection error
+Solution: 
+- MySQL running hai ya nahi check karein
+- Database name "expense_splitter" exist karta hai ya nahi
+- Username/password sahi hai ya nahi
+
+Problem: ClassNotFoundException
+Solution:
+- MySQL JDBC driver WEB-INF/lib/ me hai ya nahi check karein
+- Java files properly compile hue hain ya nahi
+
+Problem: 404 Error
+Solution:
+- Tomcat running hai ya nahi check karein
+- Project folder name "Expense_Splitter" sahi hai ya nahi
+- web.xml me servlet mappings sahi hain ya nahi
+
+Problem: Login nahi ho raha
+Solution:
+- Database me users table me data hai ya nahi check karein
+- Sign up karke naya account banayein
+
+================================================================================
+IMPORTANT NOTES:
+================================================================================
+- Default MySQL password: "root" (agar aapka different hai to change karein)
+- Default database: "expense_splitter"
+- Default port: 8080 (Tomcat)
+- All Java files compile hone chahiye before running
+
+Happy Coding! 🚀
+
